@@ -11,3 +11,13 @@
 
 1. `kubectl apply -f keycloak.yaml`
 2. `kubectl apply -f keycloak-ingress.yaml`
+
+
+## theme
+https://github.com/MAXIMUS-DeltaWare/material-keycloak-theme
+prepare configmap: `kubectl create configmap kc-theme --from-file material`
+
+
+## defaults
+realm: `sau`
+client: `default`
