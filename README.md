@@ -15,8 +15,9 @@
 
 ## theme
 https://github.com/MAXIMUS-DeltaWare/material-keycloak-theme
-prepare configmap: `kubectl create configmap kc-theme --from-file material`
+einfach `./copy_theme.sh` machen, nachdem keycloak online ist.
 
+danach das realm mit `realm-export.json` installieren.
 
 ## defaults
 realm: `sau`
