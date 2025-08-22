@@ -12,13 +12,17 @@
 1. `kubectl apply -f keycloak.yaml`
 2. `kubectl apply -f keycloak-ingress.yaml`
 
-
 ## theme
+
 https://github.com/MAXIMUS-DeltaWare/material-keycloak-theme
 einfach `./copy_theme.sh` machen, nachdem keycloak online ist.
 
 danach das realm mit `realm-export.json` installieren.
 
 ## defaults
+
 realm: `sau`
+
 client: `default`
+
+das mit dem "passwort ändern" muss man pro-account festlegen
