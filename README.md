@@ -7,6 +7,8 @@
 3. cluster starten: `minikube start`
 4. ing installieren: `minikube addons enable ingress`
 
+funktioniert btw noch nicht mit dem frontend weil CORS und so
+
 ## keycloak installieren:
 
 1. `kubectl apply -f keycloak.yaml`
