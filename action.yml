@@ -34,5 +34,5 @@ runs:
       env:
         KUBECONFIG: ${{ github.workspace }}/kubeconfig
       run: |
-        kubectl -n ${{ inputs.namespace }} apply -f keycloak-ingress.yml
-        kubectl -n ${{ inputs.namespace }} apply -f keycloak.yml
+        kubectl -n ${{ inputs.namespace }} apply -f keycloak-ingress.yaml
+        kubectl -n ${{ inputs.namespace }} apply -f keycloak.yaml
