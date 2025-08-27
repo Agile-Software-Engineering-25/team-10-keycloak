@@ -4,7 +4,8 @@ metadata:
   name: keycloak
 spec:
   rules:
-    - http:
+    - host: keycloak.sau-portal.de
+      http:
         paths:
           - path: /
             pathType: Prefix
