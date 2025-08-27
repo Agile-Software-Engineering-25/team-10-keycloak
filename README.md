@@ -28,3 +28,5 @@ realm: `sau`
 client: `default`
 
 das mit dem "passwort ändern" muss man pro-account festlegen
+
+hier kann man das testen: https://www.keycloak.org/app/#url=https://keycloak.sau-portal.de&realm=sau&client=default
