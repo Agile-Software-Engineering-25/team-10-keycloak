@@ -29,7 +29,7 @@
   "sslRequired": "external",
   "registrationAllowed": false,
   "registrationEmailAsUsername": false,
-  "rememberMe": false,
+  "rememberMe": true,
   "verifyEmail": false,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
@@ -195,20 +195,20 @@
           "composites": {
             "client": {
               "realm-management": [
-                "impersonation",
                 "view-realm",
+                "impersonation",
                 "manage-authorization",
                 "view-authorization",
                 "view-identity-providers",
                 "view-clients",
                 "view-events",
-                "query-groups",
                 "query-users",
+                "query-groups",
                 "manage-identity-providers",
                 "view-users",
-                "create-client",
                 "manage-events",
                 "query-clients",
+                "create-client",
                 "manage-realm",
                 "query-realms",
                 "manage-clients",
@@ -228,8 +228,8 @@
           "composites": {
             "client": {
               "realm-management": [
-                "query-groups",
-                "query-users"
+                "query-users",
+                "query-groups"
               ]
             }
           },
@@ -315,7 +315,6 @@
           "attributes": {}
         }
       ],
-      "demo": [],
       "account": [
         {
           "id": "98b52b10-7a3e-411c-9ebc-f9c12f2c33d4",
@@ -689,7 +688,7 @@
       "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
-      "consentRequired": false,
+      "consentRequired": true,
       "standardFlowEnabled": true,
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
@@ -702,10 +701,11 @@
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
+        "consent.screen.text": "application name should go here",
         "frontchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
-        "display.on.consent.screen": "false",
-        "oauth2.device.authorization.grant.enabled": "true",
+        "display.on.consent.screen": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -724,60 +724,8 @@
         "phone",
         "organization",
         "offline_access",
-        "microprofile-jwt"
-      ]
-    },
-    {
-      "id": "dd5a6b57-7b5a-4569-b1dc-8b50d7a8e5c8",
-      "clientId": "demo",
-      "name": "demo",
-      "description": "ONLY FOR USE IN TESTING",
-      "rootUrl": "",
-      "adminUrl": "",
-      "baseUrl": "",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "*"
-      ],
-      "webOrigins": [],
-      "notBefore": 0,
-      "bearerOnly": false,
-      "consentRequired": false,
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": false,
-      "publicClient": true,
-      "frontchannelLogout": true,
-      "protocol": "openid-connect",
-      "attributes": {
-        "realm_client": "false",
-        "oidc.ciba.grant.enabled": "false",
-        "backchannel.logout.session.required": "true",
-        "standard.token.exchange.enabled": "false",
-        "oauth2.device.authorization.grant.enabled": "true",
-        "backchannel.logout.revoke.offline.tokens": "false"
-      },
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": true,
-      "nodeReRegistrationTimeout": -1,
-      "defaultClientScopes": [
-        "web-origins",
-        "acr",
-        "profile",
-        "roles",
-        "basic",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "organization",
-        "offline_access",
-        "microprofile-jwt"
+        "microprofile-jwt",
+        "demo"
       ]
     },
     {
@@ -1384,6 +1332,18 @@
       ]
     },
     {
+      "id": "0a7954ff-354b-4ed6-9ef3-4bce948ca0d3",
+      "name": "demo",
+      "description": "demo client scope for testing oidc client",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "gui.order": "",
+        "consent.screen.text": "testing demo scope consent screen placeholder :3"
+      }
+    },
+    {
       "id": "b2159c14-2c3f-49ab-8a6e-434458d343cb",
       "name": "offline_access",
       "description": "OpenID Connect built-in scope: offline_access",
@@ -1595,7 +1555,8 @@
     "address",
     "phone",
     "microprofile-jwt",
-    "organization"
+    "organization",
+    "demo"
   ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
@@ -1607,7 +1568,7 @@
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
   "smtpServer": {},
-  "loginTheme": "material",
+  "loginTheme": "keycloak.v2",
   "accountTheme": "",
   "adminTheme": "",
   "emailTheme": "",
@@ -1665,14 +1626,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-user-property-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "oidc-usermodel-property-mapper",
+            "saml-user-attribute-mapper",
+            "oidc-address-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "saml-role-list-mapper",
-            "oidc-full-name-mapper",
-            "saml-user-attribute-mapper",
-            "oidc-address-mapper"
+            "oidc-usermodel-property-mapper",
+            "saml-user-property-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "oidc-full-name-mapper"
           ]
         }
       },
@@ -1684,14 +1645,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-user-property-mapper",
-            "oidc-address-mapper",
             "oidc-full-name-mapper",
-            "saml-role-list-mapper",
             "oidc-usermodel-attribute-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-address-mapper",
             "saml-user-attribute-mapper",
-            "oidc-usermodel-property-mapper"
+            "oidc-usermodel-property-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-user-property-mapper",
+            "saml-role-list-mapper"
           ]
         }
       },
