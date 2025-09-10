@@ -14,6 +14,10 @@ funktioniert btw noch nicht mit dem frontend weil CORS und so
 1. `kubectl apply -f keycloak.yaml`
 2. `kubectl apply -f keycloak-ingress.yaml`
 
+## config
+
+man *MUSS* in client -> client scopes -> microprofile-jwt aktivieren, weil sonst keine rollen angezeigt werden. 
+
 ## theme
 
 https://github.com/MAXIMUS-DeltaWare/material-keycloak-theme
