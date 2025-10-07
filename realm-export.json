@@ -59,6 +59,15 @@
         "attributes": {}
       },
       {
+        "id": "8a7feff0-7a14-4b4a-b2e1-c88b4d900594",
+        "name": "lecturer",
+        "description": "Group-Role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "9c8b355a-f112-4ce0-b865-c0d4207a3e71",
+        "attributes": {}
+      },
+      {
         "id": "ba15010d-3ca9-45f3-a0d0-76c09c1b1bc1",
         "name": "default-roles-sau",
         "description": "${role_default-roles}",
@@ -474,6 +483,8 @@
           "containerId": "24844465-fb0f-48b6-87ac-fe844be6a61e",
           "attributes": {}
         }
+      ],
+      "root-ui": []
       ],
       "root-ui": []
     }
