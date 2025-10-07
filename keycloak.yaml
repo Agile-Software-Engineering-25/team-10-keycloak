@@ -51,7 +51,7 @@ spec:
        - name: shared
      containers:
         - name: theme-holder
-          image: docker.io/debian:trixie
+          image: ghcr.io/agile-software-engineering-25/team-10-login-theme:latest
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
           volumeMounts:
