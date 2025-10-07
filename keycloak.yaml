@@ -46,17 +46,16 @@ spec:
       labels:
         app: keycloak
     spec:
-     # i will not speak
      volumes:
        - name: shared
      containers:
         - name: theme-holder
           image: ghcr.io/agile-software-engineering-25/team-10-login-theme:latest
           command: [ "/bin/bash", "-c", "--" ]
-          args: [ "while true; do sleep 30; done;" ]
+          args: [ "mkdir -p /data/; cp -r /mnt/material /data; while true; do sleep 30; done;" ]
           volumeMounts:
             - name: shared
-              mountPath: "/mnt/"
+              mountPath: "/data"
   
         - name: keycloak
           image: quay.io/keycloak/keycloak:26.3.2
