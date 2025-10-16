@@ -1,6 +1,8 @@
 {
   "id": "9c8b355a-f112-4ce0-b865-c0d4207a3e71",
   "realm": "sau",
+  "displayName": "SAU",
+  "displayNameHtml": "",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
@@ -30,10 +32,10 @@
   "registrationAllowed": false,
   "registrationEmailAsUsername": false,
   "rememberMe": true,
-  "verifyEmail": false,
+  "verifyEmail": true,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": false,
+  "resetPasswordAllowed": true,
   "editUsernameAllowed": false,
   "bruteForceProtected": false,
   "permanentLockout": false,
@@ -47,6 +49,15 @@
   "failureFactor": 30,
   "roles": {
     "realm": [
+      {
+        "id": "8a7feff0-7a14-4b4a-b2e1-c88b4d900594",
+        "name": "lecturer",
+        "description": "Group-Role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "9c8b355a-f112-4ce0-b865-c0d4207a3e71",
+        "attributes": {}
+      },
       {
         "id": "8a7feff0-7a14-4b4a-b2e1-c88b4d900594",
         "name": "lecturer",
@@ -265,20 +276,20 @@
           "composites": {
             "client": {
               "realm-management": [
-                "view-realm",
                 "impersonation",
+                "view-realm",
                 "manage-authorization",
                 "view-authorization",
                 "view-identity-providers",
                 "view-clients",
                 "view-events",
-                "query-users",
                 "query-groups",
+                "query-users",
                 "manage-identity-providers",
                 "view-users",
+                "create-client",
                 "manage-events",
                 "query-clients",
-                "create-client",
                 "manage-realm",
                 "query-realms",
                 "manage-clients",
@@ -298,8 +309,8 @@
           "composites": {
             "client": {
               "realm-management": [
-                "query-users",
-                "query-groups"
+                "query-groups",
+                "query-users"
               ]
             }
           },
@@ -474,6 +485,8 @@
         }
       ],
       "root-ui": []
+      ],
+      "root-ui": []
     }
   },
   "groups": [
@@ -524,6 +537,16 @@
         "university-administrative-staff"
       ],
       "clientRoles": {}
+    },
+    {
+      "id": "a12fba3a-dcc4-40e9-aacb-d72a81e09d7b",
+      "name": "testgruppe",
+      "description": "Testen der API",
+      "path": "/testgruppe",
+      "subGroups": [],
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {}
     }
   ],
   "defaultRole": {
@@ -537,8 +560,9 @@
   "requiredCredentials": [
     "password"
   ],
+  "passwordPolicy": "length(12) and notUsername(undefined) and notEmail(undefined) and notContainsUsername(undefined) and hashAlgorithm(argon2) and passwordHistory(5) and passwordAge(365)",
   "otpPolicyType": "totp",
-  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyAlgorithm": "HmacSHA256",
   "otpPolicyInitialCounter": 0,
   "otpPolicyDigits": 6,
   "otpPolicyLookAheadWindow": 1,
@@ -546,8 +570,7 @@
   "otpPolicyCodeReusable": false,
   "otpSupportedApplications": [
     "totpAppFreeOTPName",
-    "totpAppGoogleName",
-    "totpAppMicrosoftAuthenticatorName"
+    "totpAppGoogleName"
   ],
   "localizationTexts": {},
   "webAuthnPolicyRpEntityName": "keycloak",
@@ -941,10 +964,14 @@
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "*"
+        "https://sau-portal.de",
+        "*",
+        "https://sau-portal.de/*"
       ],
       "webOrigins": [
-        "*"
+        "https://sau-portal.de",
+        "*",
+        "https://sau-portal.de/*"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -1782,11 +1809,26 @@
     "contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
-  "smtpServer": {},
+  "smtpServer": {
+    "debug": "false",
+    "replyToDisplayName": "",
+    "starttls": "true",
+    "auth": "true",
+    "envelopeFrom": "",
+    "ssl": "false",
+    "password": "**********",
+    "port": "587",
+    "host": "smtp.strato.de",
+    "replyTo": "",
+    "from": "noreply@sau-portal.de",
+    "fromDisplayName": "SAU-Portal",
+    "authType": "basic",
+    "user": "noreply@sau-portal.de"
+  },
   "loginTheme": "keycloak.v2",
-  "accountTheme": "",
-  "adminTheme": "",
-  "emailTheme": "",
+  "accountTheme": "keycloak.v3",
+  "adminTheme": "keycloak.v2",
+  "emailTheme": "keycloak",
   "eventsEnabled": true,
   "eventsExpiration": 2592000,
   "eventsListeners": [
@@ -2022,6 +2064,18 @@
         "subType": "anonymous",
         "subComponents": {},
         "config": {}
+      }
+    ],
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "id": "dc851d29-17fe-4c42-95e9-ba26d2c0dfc8",
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {
+          "kc.user.profile.config": [
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+          ]
+        }
       }
     ],
     "org.keycloak.keys.KeyProvider": [
@@ -2738,7 +2792,7 @@
       "name": "Configure OTP",
       "providerId": "CONFIGURE_TOTP",
       "enabled": true,
-      "defaultAction": false,
+      "defaultAction": true,
       "priority": 10,
       "config": {}
     },
@@ -2746,8 +2800,8 @@
       "alias": "TERMS_AND_CONDITIONS",
       "name": "Terms and Conditions",
       "providerId": "TERMS_AND_CONDITIONS",
-      "enabled": false,
-      "defaultAction": false,
+      "enabled": true,
+      "defaultAction": true,
       "priority": 20,
       "config": {}
     },
@@ -2756,7 +2810,7 @@
       "name": "Update Password",
       "providerId": "UPDATE_PASSWORD",
       "enabled": true,
-      "defaultAction": false,
+      "defaultAction": true,
       "priority": 30,
       "config": {}
     },
@@ -2774,7 +2828,7 @@
       "name": "Verify Email",
       "providerId": "VERIFY_EMAIL",
       "enabled": true,
-      "defaultAction": false,
+      "defaultAction": true,
       "priority": 50,
       "config": {}
     },
@@ -2782,7 +2836,7 @@
       "alias": "delete_account",
       "name": "Delete Account",
       "providerId": "delete_account",
-      "enabled": false,
+      "enabled": true,
       "defaultAction": false,
       "priority": 60,
       "config": {}
@@ -2837,7 +2891,7 @@
       "name": "Recovery Authentication Codes",
       "providerId": "CONFIGURE_RECOVERY_AUTHN_CODES",
       "enabled": true,
-      "defaultAction": false,
+      "defaultAction": true,
       "priority": 120,
       "config": {}
     },
@@ -2869,8 +2923,11 @@
     "realmReusableOtpCode": "false",
     "cibaExpiresIn": "120",
     "oauth2DeviceCodeLifespan": "600",
+    "saml.signature.algorithm": "",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
+    "frontendUrl": "",
+    "acr.loa.map": "{}",
     "adminEventsExpiration": "2592000",
     "darkMode": "true"
   },
