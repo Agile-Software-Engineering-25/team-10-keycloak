@@ -52,14 +52,14 @@ spec:
         - name: theme-holder
           image: ghcr.io/agile-software-engineering-25/team-10-login-theme:latest
           command: [ "/bin/bash", "-c", "--" ]
-          args: [ "mkdir -p /data/; cp -r /mnt/material /data; while true; do sleep 30; done;" ]
+          args: [ "mkdir -p /data/; cp -r /mnt/* /data; while true; do sleep 30; done;" ]
           volumeMounts:
             - name: shared
               mountPath: "/data"
   
         - name: keycloak
           image: quay.io/keycloak/keycloak:26.3.2
-          args: ["start"]
+          args: ["start", "--features=quick-theme"]
           env:
             - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: "admin"
